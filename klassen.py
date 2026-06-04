@@ -23,7 +23,6 @@ class Pokemon:
     def  take_dmg(self, atk_pkm: int, atk_attacke:int):
         dmg  = (atk_pkm/max(1,self.defence))*atk_attacke  *0.5
         dmg = max(1,int(dmg * random.uniform(0.85,1.00)))
-        print(dmg)
         self.__hp -= dmg
         return dmg
 
