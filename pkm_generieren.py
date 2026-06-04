@@ -1,4 +1,4 @@
-from klassen import Pokemon, Angriffe
+from klassen import Pokemon, Attack
 import random
 
 # Holt ein Random PKM aus der liste
@@ -6,8 +6,8 @@ def get_pkm(pkm_ls:list[Pokemon])->Pokemon:
     return pkm_ls[random.randint(0, len(pkm_ls) - 1)]
 
 # Generiert die 4 Attacken für das Pokemon abhängig von seinem Typ
-def get_attacken(attacken_ls:list,typ : str)->list[Angriffe]:
-    ls = [Angriffe]
+def get_attacken(attacken_ls:list,typ : str)->list[Attack]:
+    ls = [Attack]
     if typ == 'Feuer':
         ls =attacken_ls[0]
     if typ == 'Wasser':

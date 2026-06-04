@@ -1,4 +1,4 @@
-from klassen import Angriffe, Pokemon
+from klassen import Attack, Pokemon
 import csv
 
 # Atk einlesen aus CSV Datei
@@ -12,7 +12,7 @@ def atk_einlesen(url):
                     continue
                 name = zeile[0].strip()
                 atk = zeile[1].strip()
-                atk_ls.append(Angriffe(name, int(atk)))
+                atk_ls.append(Attack(name, int(atk)))
         return atk_ls
     except FileNotFoundError:
         print(f"{url} not found")
@@ -29,9 +29,9 @@ def pkm_einlesen(url):
                 name = zeile[0].strip()
                 hp =  int(zeile[1].strip())
                 atk = int(zeile[2].strip())
-                Def = int(zeile[3].strip())
+                defence = int(zeile[3].strip())
                 typ = zeile[4].strip()
-                pkm_ls.append(Pokemon(name, hp, atk, Def, typ, None))
+                pkm_ls.append(Pokemon(name, hp, atk, defence, typ, None))
         return pkm_ls
     except FileNotFoundError:
         print(f"{url} not found")
