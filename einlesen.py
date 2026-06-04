@@ -1,6 +1,7 @@
 from klassen import Angriffe, Pokemon
 import csv
 
+# Atk einlesen aus CSV Datei
 def atk_einlesen(url):
     atk_ls = []
     try:
@@ -16,6 +17,7 @@ def atk_einlesen(url):
     except FileNotFoundError:
         print(f"{url} not found")
 
+# Alle PKM aus CSV Datei einlesen
 def pkm_einlesen(url):
     pkm_ls = []
     try:

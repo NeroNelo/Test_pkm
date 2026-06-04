@@ -1,3 +1,6 @@
+# ATK Richtig Skallieren
+# GUI Neu machen
+
 import time
 import random
 from klassen import Pokemon, Angriffe
@@ -10,17 +13,17 @@ atk_Pflanze = atk_einlesen("ATK/atk_Pflanze.csv")
 atk_Elektro = atk_einlesen("ATK/atk_Elektro.csv")
 atk_Normal = atk_einlesen("ATK/atk_Normal.csv")
 attacken= [atk_Feuer,atk_Wasser,atk_Pflanze,atk_Elektro, atk_Normal]
-print(attacken[0][0].name)
 pkm = pkm_einlesen("pokemon.csv")
 
-def gameState(spieler_pkm: Pokemon, gegner_pkm: Pokemon ):
+def pkm_Fight(spieler_pkm: Pokemon, gegner_pkm: Pokemon ):
     print(f"Ein feindliches {gegner_pkm.name} erscheinen!\nFight!!!")
     time.sleep(1)
     while True:
-        print(f"1. {spieler_pkm.attacke[0].name} ({spieler_pkm.attacke[0].atk} atk)\n2. {spieler_pkm.attacke[1].name} ({spieler_pkm.attacke[1].atk} atk)\n3. {spieler_pkm.attacke[2].name} ({spieler_pkm.attacke[2].atk} atk)\n4. {spieler_pkm.attacke[3].name} ({spieler_pkm.attacke[3].atk} atk)")
+        for i, att in enumerate(spieler_pkm.attacke):
+            print(f"{i + 1}. {att.name} ({att.atk} atk)")
         atk = int(input())
-        gegner_pkm.hp = spieler_pkm.attacke[atk-1].atk
-        print(f"{gegner_pkm.name} hat {spieler_pkm.attacke[atk - 1].atk} Schaden erlitten")
+        x =gegner_pkm.take_dmg(spieler_pkm.atk,spieler_pkm.attacke[atk-1].atk)
+        print(f"{gegner_pkm.name} hat {x} Schaden erlitten")
         time.sleep(1)
         if gegner_pkm.hp <=0:
             print(f"{gegner_pkm.name} wurde besiegt")
@@ -32,8 +35,8 @@ def gameState(spieler_pkm: Pokemon, gegner_pkm: Pokemon ):
         rnd = random.randint(0, 3)
         print(f"{gegner_pkm.name} setzt {gegner_pkm.attacke[rnd].name} ein!")
         time.sleep(1)
-        spieler_pkm.hp=gegner_pkm.attacke[rnd].atk
-        print(f"{spieler_pkm.name} hat {gegner_pkm.attacke[rnd].atk} schaden erlitten")
+        x =spieler_pkm.take_dmg(gegner_pkm.atk,gegner_pkm.attacke[atk-1].atk)
+        print(f"Dein {spieler_pkm.name} hat {x} schaden erlitten")
         time.sleep(1)
         if spieler_pkm.hp <= 0:
             print(f"{spieler_pkm.name} wurden besiegt")
@@ -47,11 +50,10 @@ def main():
 
     pkm1= get_pkm(pkm)
     pkm2= get_pkm(pkm)
-
     pkm1.attacke = get_attacken(attacken,pkm1.typ)
     pkm2.attacke = get_attacken(attacken,pkm2.typ)
 
-    gameState(pkm1, pkm2)
+    pkm_Fight(pkm1, pkm2)
     print("Spiel Zuende")
 
 if __name__ == '__main__':
