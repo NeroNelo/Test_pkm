@@ -31,7 +31,7 @@ def pkm_einlesen(url):
                 atk = int(zeile[2].strip())
                 defence = int(zeile[3].strip())
                 typ = zeile[4].strip()
-                pkm_ls.append(Pokemon(name, hp, atk, defence, typ, None))
+                pkm_ls.append(Pokemon(name, hp, atk, defence, typ, 1,None))
         return pkm_ls
     except FileNotFoundError:
         print(f"{url} not found")
